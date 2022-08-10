@@ -50,10 +50,10 @@ function getRound(socket) {
       name: horse.name,
       distance: maxDistance < currentDistance ? maxDistance : currentDistance
     }
-    
+
   });
 
-  socket.emit('ticker', round);
+  socket.emit('GET_SUCCESS_HORSES', round);
 }
 
 function trackTickers(socket) {
@@ -86,6 +86,7 @@ app.get('/', function(req, res) {
 socketServer.on('connection', (socket) => {
   socket.on('start', () => {
     horses.map(horse => horse.distance = 0);
+
     trackTickers(socket);
   });
 });
